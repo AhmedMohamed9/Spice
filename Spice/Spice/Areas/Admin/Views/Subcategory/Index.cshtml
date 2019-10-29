@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Spice.Models.Subcategory>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2 class="text-info">SubCategories</h2>
+<br />
+<partial name="_createButtonPartial" />
+<br />
+<div class="form-border divcolor">
+    <table class="table">
+        <tr>
+            <th>
+                Sub Category Name
+            </th>
+            <th>
+                Category Name
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr style="font-size:20px">
+                <td>@Html.DisplayFor(m => item.name)</td>
+                <td>@Html.DisplayFor(m => item.category.name)</td>
+                <td><partial name="_tablebuttonpartial_NoDetails" model="item.id" /></td>
+            </tr>
+        }
+    </table>
+</div>
+

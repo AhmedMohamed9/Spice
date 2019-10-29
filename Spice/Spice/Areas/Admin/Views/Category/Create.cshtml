@@ -1,0 +1,41 @@
+﻿@model Spice.Models.Category
+
+@{
+    ViewData["Title"] = "Create";
+}
+<br />
+<h2 class="text-info">Create New Categort</h2>
+
+<br />
+<br />
+<br />
+<form asp-action="Create">
+    <div class="border divcolor">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="name" class="col-form-label" style="font-size:26px"></label>
+            </div>
+            <div class="col-7">
+                <input asp-for="name" class="form-control" />
+            </div>
+            <span asp-validation-for="name" class="text-danger"></span>
+        </div>
+        <div class="form-group row" style="padding-top:20px">
+            <div class="col-7 offset-2">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="submit" class="btn btn-info form-control" />
+                    </div>
+                    <div class="col-6">
+                        <a asp-action="index" class="btn btn-success form-control">Back To List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
