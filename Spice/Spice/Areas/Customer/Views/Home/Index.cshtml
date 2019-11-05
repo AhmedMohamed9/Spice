@@ -1,8 +1,45 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model Spice.Models.Viewmodel.Index_ViewModel
+<br />
+<br />
+<div class="divcolor">
+    <div class="menu-filter-list col-10 offset-1">
+        <ul id="menu-filters" class=" list-inline text-center">
+            
+            <a asp-action="Index" asp-area="Customer" asp-controller="Home" asp-route-cat="all">
+                <li class=" ml-1 mr-1 all">
+                    Show All
+                </li>
+            </a>
+            @foreach (var item in Model.categories)
+            {
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        <a asp-action="Index" asp-area="Customer" asp-controller="Home" asp-route-cat="@item.name">
+            <li class="filter ml-1 mr-1 @item.name" data-filter=".@item.name.Replace(" ", string.Empty)">
+
+                @item.name</li>
+        </a>
+
+
+            }
+        </ul>
+
+
+        @foreach (var item in Model.categories)
+        {
+            <div class="row ">
+                <partial name="_ThumbnailAreaPartial" model="@Model.Menuitems.Where(u=>u.Category.name.Equals(item.name))" />
+            </div>
+            <br />
+        }
+    </div>
 </div>
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+             $('.@ViewData["onclick"]').addClass('active').siblings().removeClass('active')
+         })
+    </script>
+
+}

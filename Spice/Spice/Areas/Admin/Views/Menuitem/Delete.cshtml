@@ -1,0 +1,81 @@
+﻿@model Tangy.Models.ViewModels.Menuitem_ViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2 class=" text-danger" >Are You Sure Delete Menue Item</h2>
+<br />
+<br />
+<fieldset disabled>
+    <div class="form-border row divcolor">
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="menuitem.name" class="custom-label"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="menuitem.name" autocomplete="off" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="menuitem.description" class="custom-label"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="menuitem.description" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="menuitem.Price" class="custom-label"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="menuitem.Price" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="menuitem.categoryid" class="custom-label"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="menuitem.Category.name" class="form-control" />
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="menuitem.subcategoryid" class="custom-label"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="menuitem.subcategory.name" class="form-control" />
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="menuitem.spiceness" class="custom-label"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="menuitem.spiceness" class="form-control"
+                            asp-items="Html.GetEnumSelectList<Menuitem.Espice>()"></select>
+                </div>
+            </div>
+
+        </div>
+        <div class=" col-3">
+            <img src="~/images/@Model.menuitem.image" style="width:100%; border-radius:5px;border:1px solid #bbb9b9;" />
+        </div>
+        <br />
+    </div>
+</fieldset>
+<div class="form-group row">
+    <div class="col-5">
+        <a asp-action="Deletepost" asp-route-id="@Model.menuitem.id" class="btn btn-danger">Delete</a>
+        <a asp-action="index" class="btn btn-success">Back To List</a>
+    </div>
+</div>
+<br />
+
+
+
+

@@ -77,3 +77,30 @@ body {
     border-radius: 20px;
     box-shadow: 3px 4px #7c8084;
 }
+.divcolorrr {
+    background-color: #e9ecef;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 3px 4px #7c8084;
+}
+.menu-filter-list li {
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px 20px 10px;
+    text-transform: uppercase;
+    background: #ba0070;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 17px;
+    font-family: "poppins",sans-serif;
+    color: white;
+}
+ .menu-filter-list li:hover{
+        background: green;
+        color:white;
+    }
+
+    .menu-filter-list li.active {
+        background: green;
+        color: white;
+    }

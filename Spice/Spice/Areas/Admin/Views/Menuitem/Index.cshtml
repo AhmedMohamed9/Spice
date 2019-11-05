@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Spice.Models.Menuitem>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2 class="text-info">Menu Items</h2>
+<br />
+<partial name="_createButtonPartial" />
+<br />
+<div class="form-border divcolor">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(x => x.name)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.Price)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.spiceness)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(x=>x.categoryid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.subcategoryid)
+
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr style="font-size:20px">
+                <td>@Html.DisplayFor(m => item.name)</td>
+                <td>@Html.DisplayFor(m => item.Price)$</td>
+                <td><select disabled asp-for=@item.spiceness class="form-control"asp-items="Html.GetEnumSelectList<Menuitem.Espice>()"></select></td>
+                <td>@Html.DisplayFor(m => item.Category.name)</td>
+                <td>@Html.DisplayFor(m => item.subcategory.name)</td>
+                <td><partial name="_tablebuttonpartial_NoDetails" model="item.id" /></td>
+            </tr>
+        }
+    </table>
+</div>
+

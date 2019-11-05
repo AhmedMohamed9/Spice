@@ -1,12 +1,116 @@
 ﻿@page
 @model RegisterModel
+@using Spice.Utility
 @{
     ViewData["Title"] = "Register";
 }
+<br />
+<h2 class="text-success">Create New Account</h2>
+<br />
+<form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+    <div class="border divcolor">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Input.Name" class="col-form-label" style="font-size:26px"></label>
+            </div>
+            <div class="col-5 ">
+                <input asp-for="Input.Name" class="form-control" />
+            </div>
+            <span asp-validation-for="Input.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Input.Email" class="col-form-label" style="font-size:26px"></label>
+            </div>
+            <div class="col-5 ">
+                <input asp-for="Input.Email" class="form-control" />
+            </div>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Input.PhoneNumber" class="col-form-label" style="font-size:26px"></label>
+            </div>
+            <div class="col-5 ">
+                <input asp-for="Input.PhoneNumber" class="form-control" />
+            </div>
+            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Input.City" class="col-form-label" style="font-size:26px"></label>
+            </div>
+            <div class="col-5 ">
+                <input asp-for="Input.City" class="form-control" />
+            </div>
+            <span asp-validation-for="Input.City" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Input.state" class="col-form-label" style="font-size:26px"></label>
+            </div>
+            <div class="col-5 ">
+                <input asp-for="Input.state" class="form-control" />
+            </div>
+            <span asp-validation-for="Input.state" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Input.PostalCode" class="col-form-label" style="font-size:26px"></label>
+            </div>
+            <div class="col-5 ">
+                <input asp-for="Input.PostalCode" class="form-control" />
+            </div>
+            <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Input.Password" class="col-form-label" style="font-size:26px"></label>
+            </div>
+            <div class="col-5 ">
+                <input asp-for="Input.Password" class="form-control" />
+            </div>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Input.ConfirmPassword" class="col-form-label" style="font-size:26px"></label>
+            </div>
+            <div class="col-5 ">
+                <input asp-for="Input.ConfirmPassword" class="form-control" />
+            </div>
+            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        </div>
+        @if (User.IsInRole(SD.ManagerUser))
+        {
+            <div class="form-group row">
+                <div class="col-3">
+                </div>
+                <div class="col-5 ">
+                    <input type="radio" name="rduserrole" value="@SD.KitchenUser" checked />@SD.KitchenUser
+                    <input type="radio" name="rduserrole" value="@SD.FrontDeskUser" />@SD.FrontDeskUser
+                    <input type="radio" name="rduserrole" value="@SD.ManagerUser" />@SD.ManagerUser
+                </div>
+            </div>
+        }
+        <div class="form-group row" style="padding-top:20px">
+            <div class="col-5 offset-3">
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-success form-control">Register</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
-<h1>@ViewData["Title"]</h1>
 
-<div class="row">
+
+
+
+@*<div class="row">
     <div class="col-md-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h4>Create a new account.</h4>
@@ -30,7 +134,7 @@
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
-    <div class="col-md-6 col-md-offset-2">
+    <div class="col-md-6 col-md-">
         <section>
             <h4>Use another service to register.</h4>
             <hr />
@@ -60,7 +164,7 @@
             }
         </section>
     </div>
-</div>
+</div>*@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
