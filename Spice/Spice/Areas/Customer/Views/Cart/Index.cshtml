@@ -1,0 +1,129 @@
+﻿@model Spice.Models.Viewmodel.OrderDetails_ViewModel
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+    @if (Model.Listcart.Count > 0)
+    {
+        <br />
+
+        <input id="userid" asp-for="@Model.Listcart[0].applicationuserid" hidden />
+        <div class=" divcolor">
+            <div class="container">
+                <div class="card">
+                    <div class="card-header bg-dark text-light ml-0 row container">
+                        <div class="col-6">
+                            <i class="fa fa-shopping-cart"></i>&nbsp;
+                            ShoppingCart
+                        </div>
+                        <div class="col-6 text-right">
+                            <a asp-area="Customer" asp-controller="Home" class="btn btn-outline-info btn-sm">Continue Shopping</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @foreach (var item in Model.Listcart)
+                        {
+                            <div class="row">
+                                <div class="d-none d-lg-block col-lg-2 text-center ">
+                                    <img src="~/images/@item.Menuitem.image" class="rounded" style=" width:100% ;height:70% " />
+                                </div>
+                                <div class="col-lg-5 text-center col-12 text-lg-left">
+                                    <h4><strong>@item.Menuitem.name</strong></h4>
+                                    <h4><small>@item.Menuitem.description</small></h4>
+                                </div>
+                                <div class="col-12 text-center col-lg-5 text-lg-left row">
+                                    <div class="col-4 text-md-right pt-2">
+                                        <h6><strong>$@item.Menuitem.Price<span class="text-muted">x</span>@item.count</strong></h6>
+                                    </div>
+                                    <div class="col-sm-4 col-lg-6">
+                                        <div class="float-right mx-1">
+                                            <button type="submit" class="btn btn-primary" asp-action="plus" asp-route-cartid="@item.id">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="float-right mx-1">
+                                            <button type="submit" class="btn btn-danger" asp-action="minus" asp-route-cartid="@item.id">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-2  text-right">
+                                        <button type="submit" class="btn btn-outline-danger" asp-action="remove" asp-route-cartid="@item.id">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                        }
+                        <div class="row">
+                            <div class="col-12 col-md-5">
+                                <div class="row">
+                                    <div class="col-7">
+                                        @*<input asp-for="@Model.OrderHeaders.CouponCode" id="txtcoupon" class="form-control" placeholder="Coupon Code..." />*@
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item dropdown" style="width:100%">
+                                                <a class="nav-link dropdown-toggle form-control text-center " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Coupons
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                    @foreach (var item in Model.OrderHeaders.copunslist)
+                                                    {
+                                                        <a class="dropdown-item" asp-area="Customer" asp-controller="Cart" asp-action="Addcoupon" asp-route-id="@item.id" asp-route-totalorignal="@Model.OrderHeaders.ordertotal">@item.Name</a>
+                                                    }
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-5" style="margin-top:2px;">
+                                        @if (Model.OrderHeaders.ordertotal != Model.OrderHeaders.OrdartotalOriginal)
+                                        {
+                                            <button type="submit" class="btn btn-sm form-control btn-outline-danger" id="btnremovecoupon" asp-action="removecoupon">
+                                                Remove Coupon
+                                            </button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 offset-md-1 col-lg-4 offset-lg-3 pr-4">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between bg-light">
+                                        <span class="text-info">Total (USD)</span>
+                                        <strong class="text-info">$<span>@Model.OrderHeaders.OrdartotalOriginal</span></strong>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+                        @if (Model.OrderHeaders.ordertotal != Model.OrderHeaders.OrdartotalOriginal)
+                        {
+                            <div class="row">
+                                <div class="col-12 col-md-6 offset-md-1 col-lg-4 offset-lg-8 pr-4">
+                                    <ul class="list-group">
+                                        <li class="list-group-item d-flex justify-content-between bg-light">
+                                            <span class="text-info">Total After Coupon (USD)</span>
+                                            <strong class="text-info">$<span>@Model.OrderHeaders.ordertotal</span></strong>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="card-footer">
+                        <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8">
+                            <a asp-action="Summary" asp-area="Customer" asp-controller="cart" class="btn btn-success form-control">Summary</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="divcolor">No Items added to the shopping cart....</div>
+    }
+</form>

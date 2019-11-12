@@ -19,5 +19,7 @@ namespace Spice.Data
         public DbSet<Copuns> Copuns { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<ShopingCart> shopingCarts { get; set; }
+        public DbSet<OrderHeaders> OrderHeaders { get; set; }
+        public DbSet<OrderDatails> OrderDatails { get; set; }
     }
 }

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Spice.Models.Copuns>
+
+@{
+    ViewData["Title"] = "Coupons";
+}
+
+<h2 class="text-success">Coupons</h2>
+
+<div class="divcolor ">
+    <p>
+        <partial name="_createButtonPartial" />
+    </p>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CouponType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Discount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MinimumAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <select disabled asp-for=@item.CouponType class="form-control"
+                                asp-items="Html.GetEnumSelectList<Copuns.EcouponType>()"></select>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Discount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MinimumAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsActive)
+                    </td>
+                    <partial name="_TableButtonNoDetailsPartial" model="item.id" />
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

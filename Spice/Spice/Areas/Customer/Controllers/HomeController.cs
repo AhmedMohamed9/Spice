@@ -36,6 +36,13 @@ namespace Spice.Controllers
                 categories = await db.categories.ToListAsync(),
                 Copuns = db.Copuns.ToList()
             };
+            var ClaimsIden = (ClaimsIdentity)User.Identity;
+            var claim = ClaimsIden.FindFirst(ClaimTypes.NameIdentifier);
+            if (claim != null)
+            {
+                var listshopingcarts = db.shopingCarts.Where(u => u.applicationuserid == claim.Value).ToList().Count;
+                HttpContext.Session.SetInt32("sscartcount", listshopingcarts);
+            }
             if (cat == null || cat =="all")
             {
                 IndexVM.Menuitems = await db.Menuitem.Include(m => m.Category).Include(x => x.subcategory).ToListAsync();

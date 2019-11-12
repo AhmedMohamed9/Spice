@@ -9,7 +9,23 @@ namespace Spice.Models
     public class Copuns
     {
         public int id { get; set; }
+
         [Required]
-        public string name { get; set; }
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+        [Required]
+        public string CouponType { get; set; }
+        public enum EcouponType { Percent = 0, Dollar = 1 }
+        [Required]
+
+        public double Discount { get; set; }
+
+        [Required]
+
+        public double MinimumAmount { get; set; }
+
+        public byte[] Picture { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

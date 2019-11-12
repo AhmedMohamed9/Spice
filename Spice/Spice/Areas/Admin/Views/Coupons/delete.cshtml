@@ -1,0 +1,93 @@
+﻿@model Spice.Models.Copuns
+@{
+    ViewData["Title"] = "Delete";
+}
+<br />
+<h2 class="alert alert-danger">Are You Sure To Delete Coupons</h2>
+<br />
+<div class="row">
+    <div class="col-6">
+        <form asp-action="delete" enctype="multipart/form-data">
+
+            <div class="form-border">
+                <fieldset disabled>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="Name" class="custom-label"></label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="Name" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="Picture" class="custom-label"></label>
+                        </div>
+                        <div class="col-8">
+                            <input type="file" name="picture" id="picture" multiple asp-for="Name" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="CouponType" class="custom-label"></label>
+                        </div>
+                        <div class="col-8">
+                            <select asp-for="CouponType" asp-items="Html.GetEnumSelectList<Copuns.EcouponType>()" class="form-control"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="Discount" class="custom-label"></label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="Discount" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Discount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="MinimumAmount" class="custom-label"></label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="MinimumAmount" class="form-control" />
+                        </div>
+                        <span asp-validation-for="MinimumAmount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="IsActive" class="custom-label"></label>
+                        </div>
+                        <div class="col-8">
+                            <input type="checkbox" asp-for="IsActive" class="form-control" />
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                    <a asp-action="Index" class="btn btn-primary">Back To Lists</a>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="col-5">
+        @{
+            var imgsrc = string.Empty;
+
+            if (Model.Picture != null)
+            {
+                var bae64 = Convert.ToBase64String(Model.Picture);
+                imgsrc = string.Format("data:image/jbg;base64,{0}", bae64);
+                <img src="@imgsrc" style=" height:300px; width:100%" />
+
+
+            }
+        }
+    </div>
+</div>
+

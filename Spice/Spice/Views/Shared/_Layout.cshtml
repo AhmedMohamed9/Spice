@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
     @using Spice.Utility
+    @using Microsoft.AspNetCore.Http
+    @inject IHttpContextAccessor HttpContextAccessor
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Spice</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
 </head>
@@ -36,15 +41,33 @@
                                     <a class="dropdown-item" asp-action="Index" asp-controller="Subcategory" asp-area="Admin">Sub Category</a>
                                     <a class="dropdown-item" asp-action="Index" asp-controller="Menuitem" asp-area="Admin">Menu Item</a>
                                     <a class="dropdown-item" asp-action="Index" asp-controller="User" asp-area="Admin">Users</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Coupons" asp-area="Admin">Coupons</a>
                                 </div>
                             </li>
 
                         }
-                        <li style="color:white">
-                            <a href="#" class="nav-link">
-                                <i class="fas fa-shopping-cart"></i>&nbsp;(0)
-                            </a>
-                        </li>
+                        @if (HttpContextAccessor.HttpContext.Session.GetInt32("sscartcount") != null)
+                        {
+
+                            <li style="color:white">
+                                <a asp-area="Customer" asp-controller="Cart"  class="nav-link">
+                                    @{
+
+                                        var cunt = HttpContextAccessor.HttpContext.Session.GetInt32("sscartcount");
+                                    }
+                                    <i class="fas fa-shopping-cart"></i>&nbsp;(@cunt)
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li style="color:white">
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-shopping-cart"></i>&nbsp;(0)
+                                </a>
+                            </li>
+                        }
+
                         @*<li class="nav-item">
                                 <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                             </li>*@
@@ -67,6 +90,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/jquery-ui.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
