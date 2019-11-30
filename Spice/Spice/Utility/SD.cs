@@ -20,9 +20,7 @@ namespace Spice.Utility
         public const string StatusCompleted = "Completed";
         public const string StatusCancelled= "Cancelled";
 
-        public const string PaymentStatuspending= "pending";
-        public const string PaymentStatusapproved= "approved";
-        public const string PaymentStatusrejected= "rejected";
+       
 
 
         public static double discount(Copuns coupon,double originalordertotal)

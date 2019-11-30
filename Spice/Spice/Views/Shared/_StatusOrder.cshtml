@@ -1,0 +1,32 @@
+﻿@model string
+@using Spice.Utility
+@if (Model == SD.StatusSubmitted)
+{
+        <h2 style="text-align:center" class=" text-info">Order Submitted</h2>
+        <img style="height:120px;margin-left:44%" src="~/images/Sumitted.png" />
+}
+else
+{
+    @if (Model == SD.StatusInProcess)
+    {
+        //in kitchen
+        <img src="~/images/cooking-scene.jpg" />
+    }
+    else
+    {
+        @if (Model == SD.StatusReady)
+        {
+            //Ready For PickUp
+            <img src="~/images/Logo_order-pickup.jpg" />
+        }
+        else
+        {
+            @if (Model == SD.StatusCompleted)
+            {
+                //Completed
+                <img src="~/images/download.jpg" />
+            }
+        }
+    }
+
+}

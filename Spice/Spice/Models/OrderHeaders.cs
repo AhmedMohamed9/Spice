@@ -29,6 +29,7 @@ namespace Spice.Models
         [Required]
         [NotMapped]
         [Display(Name ="Pick UP Date")]
+        
         public DateTime PickDate { get; set; }
         [NotMapped]
         public List<Copuns> copunslist { get; set; }

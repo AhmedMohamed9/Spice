@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -108,10 +109,9 @@ namespace Spice.Areas.Customer.Controllers
             var claim = clamidentity.FindFirst(ClaimTypes.NameIdentifier);
             detailcard.Listcart = await db.shopingCarts.Where(c => c.applicationuserid == claim.Value).ToListAsync();
 
-            detailcard.OrderHeaders.PaymentStatus = SD.PaymentStatuspending;
             detailcard.OrderHeaders.orderdate = DateTime.Now;
             detailcard.OrderHeaders.userid = claim.Value;
-            detailcard.OrderHeaders.Status = SD.PaymentStatuspending;
+            detailcard.OrderHeaders.Status = SD.StatusSubmitted;
             detailcard.OrderHeaders.Picktime = Convert.ToDateTime(detailcard.OrderHeaders.PickDate.ToShortDateString()
                                               + " " + detailcard.OrderHeaders.Picktime.ToShortTimeString());
             List<OrderDatails> orderdetailslist = new List<OrderDatails>();
@@ -151,7 +151,8 @@ namespace Spice.Areas.Customer.Controllers
             
             HttpContext.Session.SetInt32("sscartcount", 0);
             await db.SaveChangesAsync();
-            return RedirectToAction("index", "Home");
+            return RedirectToAction("confirm", "Order",new { id=detailcard.OrderHeaders.id});
+            //return RedirectToAction("index", "Home");
         }
         public IActionResult Addcoupon(int id, double totalorignal)
         {
@@ -195,7 +196,6 @@ namespace Spice.Areas.Customer.Controllers
 
             return RedirectToAction("index");
         }
-
-
+       
     }
 }
